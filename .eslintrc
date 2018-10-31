@@ -1,0 +1,24 @@
+{
+  "extends": ["eslint-config-airbnb", "eslint-config-prettier"],
+  "plugins": ["eslint-plugin-prettier"],
+  "parser": "babel-eslint",
+  "env": {
+    "jest": true,
+    "browser": true
+  },
+  "rules": {
+    "no-console": "off", // Console logs are too useful and are removed in prod anyway
+    "no-underscore-dangle": "off", // It's classic pattern to denote private props.
+    "react/prop-types": "off", // We're using flow instead
+    "react/jsx-filename-extension": "off", // We're using .js for jsx files
+    "prettier/prettier": [
+      "error",
+      {
+        "printWidth": 80, // Easy to read
+        "semi": false, // Almost always unecessary
+        "singleQuote": true, // Easy to read
+        "trailingComma": "es5" // Helps simplify diffs
+      }
+    ]
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "name": "react-text-templates",
+  "version": "1.0.0",
+  "description": "simple library to render plaintext templates to React elements",
+  "main": "index.js",
+  "repository": "https://github.com/databyss-org/react-text-templates",
+  "author": "pzhine",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^16.4.2"
+  },
+  "devDependencies": {
+    "babel-core": "6.26.0",
+    "babel-preset-react-app": "^3.1.1",
+    "babel-eslint": "^8.2.3",
+    "babel-jest": "20.0.3",
+    "babel-loader": "7.1.2",
+    "eslint": "4.10.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-loader": "1.9.0",
+    "eslint-plugin-flowtype": "2.39.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "5.1.1",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "7.4.0",
+    "flow-bin": "^0.79.1",
+    "jest": "23.6.0",
+    "jest-pnp-resolver": "^1.0.1",
+    "jest-resolve": "^23.6.0",
+    "jest-runner-eslint": "^0.7.1",
+    "prettier": "1.13.5",
+    "prettier-eslint": "^8.8.1",
+    "react-dev-utils": "^5.0.1",
+    "react-test-renderer": "^16.6.0",
+    "webpack": "3.8.1",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "scripts": {
+    "build": "NODE_ENV=production webpack",
+    "test": "jest --watch"
+  },
+  "jest": {
+    "projects": [
+      {
+        "displayName": "lint",
+        "runner": "jest-runner-eslint",
+        "testMatch": [
+          "<rootDir>/index.js"
+        ]
+      },
+      {
+        "displayName": "test",
+        "collectCoverageFrom": [
+          "index.js"
+        ],
+        "resolver": "jest-pnp-resolver",
+        "testMatch": [
+          "<rootDir>/*.test.js"
+        ],
+        "testEnvironment": "jsdom",
+        "testURL": "http://localhost",
+        "transform": {
+          "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
+        },
+        "transformIgnorePatterns": [
+          "[/\\\\]node_modules[/\\\\].+\\.js$"
+        ],
+        "moduleFileExtensions": [
+          "js"
+        ]
+      }
+    ]
+  },
+  "babel": {
+    "presets": [
+      "react-app"
+    ]
+  }
+}
