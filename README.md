@@ -27,7 +27,7 @@ const Link = ({ href, children }) => <a href={href}>{children}</a>
 const template = 'We found {COUNT} instances of the term {TERM} in the article.'
 
 const tokens = {
-  COUNT: 4,
+  COUNT: 42,
   TERM: <Link href="/term/presence">Presence</Link>,
 }
 
