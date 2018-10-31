@@ -39,7 +39,7 @@ If you rendered the exported component, it would produce the following DOM:
 ```html
 <p>
   We found 42 instances of the term
-  <Link href="/term/presence">Presence</Link>
+  <a href="/term/presence">Presence</a>
   in the article.
 </p>
 ```
