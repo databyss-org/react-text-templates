@@ -38,7 +38,7 @@
   },
   "scripts": {
     "build": "NODE_ENV=production webpack",
-    "test": "jest --watch"
+    "test": "NODE_ENV=test [ ! -z \"$CI\" ] && npx jest || npx jest --watch"
   },
   "jest": {
     "projects": [
