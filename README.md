@@ -17,7 +17,7 @@ renderTemplate(template, tokens)
 
 ### Basic example
 
-Render a component inline in some text:
+Render a template that contains string and component tokens:
 
 ```js
 import renderTemplate from 'react-text-templates'
