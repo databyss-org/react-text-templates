@@ -1,44 +1,65 @@
 {
   "name": "react-text-templates",
-  "version": "1.0.0",
-  "description": "simple library to render plaintext templates to React elements",
+  "version": "1.0.1",
+  "description": "Simple library to render plaintext templates to React elements",
   "main": "index.js",
-  "repository": "https://github.com/databyss-org/react-text-templates",
-  "author": "pzhine",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/databyss-org/react-text-templates"
+  },
+  "keywords": [
+    "react",
+    "component",
+    "template",
+    "tokens"
+  ],
+  "bugs": {
+    "url": "https://github.com/databyss-org/react-text-templates/issues"
+  },
+  "author": "databyss.org",
   "license": "MIT",
-  "dependencies": {
-    "react": "^16.4.2"
+  "peerDependencies": {
+    "react": "*"
   },
   "devDependencies": {
-    "babel-core": "6.26.0",
-    "babel-preset-react-app": "^3.1.1",
-    "babel-eslint": "^8.2.3",
-    "babel-jest": "20.0.3",
-    "babel-loader": "7.1.2",
+    "@babel/cli": "7.1.2",
+    "@babel/core": "7.1.2",
+    "@babel/node": "7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/preset-env": "7.1.0",
+    "@babel/preset-react": "7.0.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "^9.0.0",
+    "babel-jest": "^23.6.0",
+    "cross-env": "^5.1.1",
     "eslint": "4.10.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
-    "eslint-loader": "1.9.0",
     "eslint-plugin-flowtype": "2.39.1",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "5.1.1",
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "7.4.0",
     "flow-bin": "^0.79.1",
+    "fs-extra": "^7.0.0",
     "jest": "23.6.0",
     "jest-pnp-resolver": "^1.0.1",
     "jest-resolve": "^23.6.0",
     "jest-runner-eslint": "^0.7.1",
     "prettier": "1.13.5",
     "prettier-eslint": "^8.8.1",
+    "react": "^16.4.2",
     "react-dev-utils": "^5.0.1",
     "react-test-renderer": "^16.6.0",
-    "webpack": "3.8.1",
-    "webpack-node-externals": "^1.7.2"
+    "rimraf": "^2.6.2"
   },
   "scripts": {
-    "build": "NODE_ENV=production webpack",
-    "test": "NODE_ENV=test [ ! -z \"$CI\" ] && npx jest || npx jest --watch"
+    "build": "yarn build:es2015 && yarn build:es2015modules && yarn build:copy-files",
+    "build:copy-files": "babel-node scripts/copy-files.js",
+    "build:es2015": "cross-env NODE_ENV=production babel ./index.js --out-dir ./dist",
+    "build:es2015modules": "cross-env NODE_ENV=production BABEL_ENV=modules babel ./index.js --out-file ./dist/index.es.js",
+    "prebuild": "rimraf dist",
+    "test": "node scripts/test.js"
   },
   "jest": {
     "projects": [
@@ -51,21 +72,11 @@
       },
       {
         "displayName": "test",
-        "collectCoverageFrom": [
-          "index.js"
-        ],
         "resolver": "jest-pnp-resolver",
         "testMatch": [
           "<rootDir>/*.test.js"
         ],
         "testEnvironment": "jsdom",
-        "testURL": "http://localhost",
-        "transform": {
-          "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
-        },
-        "transformIgnorePatterns": [
-          "[/\\\\]node_modules[/\\\\].+\\.js$"
-        ],
         "moduleFileExtensions": [
           "js"
         ]
@@ -74,7 +85,28 @@
   },
   "babel": {
     "presets": [
-      "react-app"
-    ]
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "env": {
+      "development": {
+        "plugins": [
+          "@babel/plugin-proposal-object-rest-spread"
+        ]
+      },
+      "modules": {
+        "presets": [
+          [
+            "@babel/preset-env",
+            {
+              "modules": false
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "engines": {
+    "node": ">=6.0.0"
   }
 }

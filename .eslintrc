@@ -7,6 +7,12 @@
     "browser": true
   },
   "rules": {
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["**/*.*"]
+      }
+    ], // we use devDependencies
     "no-console": "off", // Console logs are too useful and are removed in prod anyway
     "no-underscore-dangle": "off", // It's classic pattern to denote private props.
     "react/prop-types": "off", // We're using flow instead
