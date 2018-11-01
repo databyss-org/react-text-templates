@@ -48,3 +48,11 @@ test('keys are added to jsx elements', () => {
   expect(linkNodes[0]._fiber.key).toEqual('0')
   expect(linkNodes[1]._fiber.key).toEqual('1')
 })
+
+test('handle undefined tokens', () => {
+  const template = 'found {COUNT} instances of {TERM}'
+  const tokenDict = { COUNT: 42 }
+  expect(renderTemplate(template, tokenDict)).toBe(
+    'found 42 instances of undefined'
+  )
+})
