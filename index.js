@@ -3,7 +3,7 @@ import React from 'react'
 const escape = str =>
   typeof str === 'string'
     ? str.replace(new RegExp('"', 'g'), '&quot;')
-    : str.toString()
+    : String(str)
 
 export default (template, tokenDict) => {
   // "extract" tokens in template by splitting on token pattern
@@ -25,8 +25,8 @@ export default (template, tokenDict) => {
     }
     const key = part.match(keyRegex)[1]
     const val = tokenDict[key]
-    // if the value is not a string or number literal, we assume jsx
-    if (typeof val !== 'string' && typeof val !== 'number') {
+    // if the value is a react element, add a key and concat
+    if (React.isValidElement(val)) {
       foundJsx = true
       const jsxval = React.cloneElement(val, {
         key: jsxKeyCount,
