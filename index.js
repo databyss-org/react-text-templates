@@ -42,18 +42,20 @@ export default (template, tokenDict) => {
     //   so ['you have ', '50', ' friends in common with', <Link href="/joe">Joe</Link>]
     //   becomes ['you have 50 friends in common with', <Link href="/joe">Joe</Link>]
     let strAccum = ''
-    return renderedParts.reduce((arr, part) => {
-      if (typeof part !== 'string') {
-        if (!strAccum.length) {
-          return arr.concat(part)
+    return renderedParts
+      .reduce((arr, part) => {
+        if (typeof part !== 'string') {
+          if (!strAccum.length) {
+            return arr.concat(part)
+          }
+          const flushedStr = strAccum
+          strAccum = ''
+          return arr.concat([flushedStr, part])
         }
-        const flushedStr = strAccum
-        strAccum = ''
-        return arr.concat([flushedStr, part])
-      }
-      strAccum = strAccum.concat(part)
-      return arr
-    }, [])
+        strAccum = strAccum.concat(part)
+        return arr
+      }, [])
+      .concat(strAccum)
   }
   return renderedParts.join('')
 }

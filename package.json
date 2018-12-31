@@ -1,6 +1,6 @@
 {
   "name": "react-text-templates",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple library to render plaintext templates to React elements",
   "main": "index.js",
   "repository": {

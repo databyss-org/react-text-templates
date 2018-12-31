@@ -21,7 +21,7 @@ test('quotes are html-ified', () => {
 })
 
 test('tokens are replaced, jsx value', () => {
-  const template = 'found {COUNT} instances of {TERM}'
+  const template = 'found {COUNT} instances of {TERM} in the document'
   const tokenDict = {
     COUNT: 42,
     TERM: <Link href="/presence">Presence</Link>,
@@ -31,6 +31,7 @@ test('tokens are replaced, jsx value', () => {
     <Link key={1} href="/presence">
       Presence
     </Link>,
+    ' in the document',
   ])
   const result = TestRenderer.create(renderTemplate(template, tokenDict))
   expect(result.toJSON()).toEqual(expected.toJSON())
