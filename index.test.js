@@ -1,6 +1,6 @@
 import React from 'react'
 import TestRenderer from 'react-test-renderer'
-import renderTemplate from './'
+import renderTemplate, { DOUBLE_CURLY } from './'
 
 // test component
 const Link = ({ href, children }) => <a href={href}>{children}</a>
@@ -50,10 +50,10 @@ test('keys are added to jsx elements', () => {
   expect(linkNodes[1]._fiber.key).toEqual('1')
 })
 
-test('handle undefined tokens', () => {
+test('do not replace tokens unless they are in the dict', () => {
   const template = 'found {COUNT} instances of {TERM}'
   const tokenDict = { COUNT: 42 }
   expect(renderTemplate(template, tokenDict)).toBe(
-    'found 42 instances of undefined'
+    'found 42 instances of {TERM}'
   )
 })

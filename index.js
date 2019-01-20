@@ -25,6 +25,10 @@ export default (template, tokenDict) => {
     }
     const key = part.match(keyRegex)[1]
     const val = tokenDict[key]
+    // if key isn't in the dict, leave the string alone
+    if (!val) {
+      return arr.concat(part)
+    }
     // if the value is a react element, add a key and concat
     if (React.isValidElement(val)) {
       foundJsx = true
